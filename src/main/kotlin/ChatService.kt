@@ -1,21 +1,21 @@
 package ru.netology
 
 class ChatService {
-    private var chats = mutableMapOf<List<Int>, MutableList<Message>>()
+    private var chats: MutableMap<List<Int>, MutableList<Message>> = mutableMapOf()
     private var usersData = mutableListOf<User>()
     private var lastId = 1
 
-    fun addUserToData(user: User): Boolean{
-        if (usersData.contains(user)) {
+    fun addUserToData(user: User): Boolean {
+        return if (usersData.contains(user)) {
             println("Пользователь с таким Id уже существует!!")
-            return false
+            false
         } else {
             usersData.plusAssign(user)
-            return true
+            true
         }
     }
 
-    fun createChat(message: Message) : Int {
+    fun addMessage(message: Message): Int {
         val key: List<Int> = listOf(message.senderId, message.recipientId)
         val newMessage = message.copy(id = lastId++)
 
@@ -31,93 +31,96 @@ class ChatService {
         return chats.size
     }
 
-    fun deleteMessage(messageId: Int) : Boolean {
-        chats.forEach { (key: List<Int>, value: MutableList<Message>) ->
-            value.forEach { message: Message ->
+    fun deleteMessage(messageId: Int): Boolean {
+        val externalIterator = chats.iterator()
+        externalIterator.forEach { entry ->
+            val interiorIterator = entry.value.iterator()
+            interiorIterator.forEach { message: Message ->
                 if (message.id == messageId) {
-                    val n = value.filterNot { it.id == messageId } as MutableList
-                    chats[key] = n
-                } else {
-                    println("Сообщения с Id= $messageId не найдено!!")
-                    return false
+                    val n = entry.value.filterNot { it.id == messageId } as MutableList
+                    chats[entry.key] = n
+                    if (entry.value.isEmpty()) {
+                        externalIterator.remove()
+                    }
+                    return true
                 }
             }
         }
-        val iterator = chats.iterator()
-        iterator.forEach {
-            if (it.value.isEmpty()) {
-                iterator.remove()
-            }
-        }
-       return true
+        println("Сообщения с таким ID не найдено!!")
+        return false
     }
 
-    fun deleteChatById(chatId: List<Int>) : Boolean {
+    fun deleteChatById(chatId: List<Int>): Boolean {
         val iterator = chats.iterator()
         iterator.forEach {
-            if (it.key == chatId) {
+            if (it.key == chatId || it.key == chatId.reversed()) {
                 iterator.remove()
+                return true
             }
         }
-        return true
+        println("Чат с данным Id не найден!!")
+        return false
     }
 
-    fun editingMessage(updatedMessage: Message) : Boolean {
+    fun editingMessage(updatedMessage: Message): Boolean {
         chats.forEach { (_: List<Int>, value: MutableList<Message>) ->
             value.forEach { message: Message ->
                 if (message.id == updatedMessage.id) {
                     val newMessage = message.copy(
-                            dateTime = updatedMessage.dateTime,
-                            text = updatedMessage.text,
-                            readStatus = true
+                        dateTime = updatedMessage.dateTime,
+                        text = updatedMessage.text,
+                        readStatus = true
                     )
                     value[value.indexOf(message)] = newMessage
-                } else {
-                    println("Сообщения с Id= ${updatedMessage.id} не найдено!!")
-                    return false
+                    return true
                 }
             }
         }
-        return true
+        println("Сообщения с таким ID не найдено!!")
+        return false
     }
 
-    fun getChats() : MutableMap<Int, MutableList<Message>> {
-        var chatList = mutableMapOf<Int, MutableList<Message>>()
-        var key = 1
-        for ((k, v) in chats) {
-            chatList.put(key, v)
-            key += 1
+    fun getChatList(): MutableMap<Int, MutableList<Message>> {
+        val chatList = mutableMapOf<Int, MutableList<Message>>()
+        var count = 1
+        chats.forEach { (_, value) ->
+            chatList[count] = value
+            count += 1
         }
-       return chatList
+        return chatList
     }
 
-    fun getMessagesFromChat(chatId: List<Int>, lastMessageId: Int, numberOfMessages: Int) {
+    fun getMessagesFromChat(chatId: List<Int>, lastMessageId: Int, numberOfMessages: Int): List<Message> {
+        var chatMessageList = listOf<Message>()
         chats.forEach { (key: List<Int>, value: List<Message>) ->
             if (key == chatId) {
-                println("Список сообщений чата ${key[0]}-${key[1]}:")
-                val filteredListOfMessages =
-                        value.filter { it.id >= lastMessageId }.subList(0, numberOfMessages)
+                chatMessageList =
+                    value.filter { it.id >= lastMessageId }.subList(0, numberOfMessages)
 
-                filteredListOfMessages.forEach { message ->
+                chatMessageList.forEach { message ->
                     value[value.indexOf(message)] = message.copy(readStatus = true)
                 }
-                println("$filteredListOfMessages")
             }
         }
+        return chatMessageList
     }
 
-    fun getUnreadChats(userId: Int) {
-        var unreadChatCount = 0
+    fun getUnreadChats(userId: Int): MutableList<List<Message>> {
+        val unreadChatList = mutableListOf<List<Message>>()
 
         chats.forEach { (key, value) ->
             if (key.contains(userId)) {
                 val newList = value.filter { it.recipientId == userId && !it.readStatus }
-                if (newList.any { !it.readStatus }) {
-                    unreadChatCount += 1
-                }
+                unreadChatList.plusAssign(newList)
             }
         }
-        println("Количество непрочитанных чатов пользователя: $unreadChatCount")
+
+        val iterator = unreadChatList.iterator()
+        iterator.forEach {
+            if (it.isEmpty()) {
+                iterator.remove()
+            }
+        }
+        return unreadChatList
     }
 }
-
