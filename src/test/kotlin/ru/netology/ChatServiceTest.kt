@@ -1,8 +1,7 @@
 package ru.netology
 
-import org.junit.Test
-
 import org.junit.Assert.*
+import org.junit.Test
 import java.time.LocalDateTime
 import java.time.format.DateTimeFormatter
 
@@ -14,9 +13,7 @@ class ChatServiceTest {
         val lena = User(
             id = 2,
             firstName = "Lena",
-            lastName = "Berkova",
-            emptyList(),
-            emptyList()
+            lastName = "Berkova"
         )
         val chatService = ChatService()
 
@@ -33,16 +30,12 @@ class ChatServiceTest {
         val lena = User(
             id = 2,
             firstName = "Lena",
-            lastName = "Berkova",
-            emptyList(),
-            emptyList()
+            lastName = "Berkova"
         )
         val anotherLena = User(
             id = 2,
             firstName = "Lena",
-            lastName = "Berkova",
-            emptyList(),
-            emptyList()
+            lastName = "Berkova"
         )
         val chatService = ChatService()
 
@@ -64,16 +57,12 @@ class ChatServiceTest {
         val vasya = User(
             id = 1,
             firstName = "Leo",
-            lastName = "Di Tolstoy",
-            emptyList(),
-            emptyList()
+            lastName = "Di Tolstoy"
         )
         val lena = User(
             id = 2,
             firstName = "Lena",
-            lastName = "Berkova",
-            emptyList(),
-            emptyList()
+            lastName = "Berkova"
         )
         val message1 = Message(
             dateTime = formatted,
@@ -92,7 +81,7 @@ class ChatServiceTest {
     }
 
     @Test
-    fun addMessage_SecondChat() {
+    fun addMessage_SecondMessage() {
         // arrange
         val time: LocalDateTime = LocalDateTime.now()
         val formatter: DateTimeFormatter = DateTimeFormatter.ofPattern("dd-MM-yyyy HH:mm:ss")
@@ -101,23 +90,12 @@ class ChatServiceTest {
         val vasya = User(
             id = 1,
             firstName = "Leo",
-            lastName = "Di Tolstoy",
-            emptyList(),
-            emptyList()
+            lastName = "Di Tolstoy"
         )
         val lena = User(
             id = 2,
             firstName = "Lena",
-            lastName = "Berkova",
-            emptyList(),
-            emptyList()
-        )
-        val jora = User(
-            id = 3,
-            firstName = "Giorgio",
-            lastName = "Vkarmani",
-            emptyList(),
-            emptyList()
+            lastName = "Berkova"
         )
         val message1 = Message(
             dateTime = formatted,
@@ -129,13 +107,12 @@ class ChatServiceTest {
             dateTime = formatted,
             text = "third",
             senderId = 1,
-            recipientId = 3
+            recipientId = 2
         )
 
         //act
         chatService.addUserToData(vasya)
         chatService.addUserToData(lena)
-        chatService.addUserToData(jora)
         chatService.addMessage(message1)
         val result = chatService.addMessage(message3)
 
@@ -153,16 +130,12 @@ class ChatServiceTest {
         val vasya = User(
             id = 1,
             firstName = "Leo",
-            lastName = "Di Tolstoy",
-            emptyList(),
-            emptyList()
+            lastName = "Di Tolstoy"
         )
         val lena = User(
             id = 2,
             firstName = "Lena",
-            lastName = "Berkova",
-            emptyList(),
-            emptyList()
+            lastName = "Berkova"
         )
         val message1 = Message(
             id = 1,
@@ -192,16 +165,12 @@ class ChatServiceTest {
         val vasya = User(
             id = 1,
             firstName = "Leo",
-            lastName = "Di Tolstoy",
-            emptyList(),
-            emptyList()
+            lastName = "Di Tolstoy"
         )
         val lena = User(
             id = 2,
             firstName = "Lena",
-            lastName = "Berkova",
-            emptyList(),
-            emptyList()
+            lastName = "Berkova"
         )
         val message1 = Message(
             id = 1,
@@ -231,16 +200,12 @@ class ChatServiceTest {
         val vasya = User(
             id = 1,
             firstName = "Leo",
-            lastName = "Di Tolstoy",
-            emptyList(),
-            emptyList()
+            lastName = "Di Tolstoy"
         )
         val lena = User(
             id = 2,
             firstName = "Lena",
-            lastName = "Berkova",
-            emptyList(),
-            emptyList()
+            lastName = "Berkova"
         )
         val message1 = Message(
             dateTime = formatted,
@@ -270,16 +235,12 @@ class ChatServiceTest {
         val vasya = User(
             id = 1,
             firstName = "Leo",
-            lastName = "Di Tolstoy",
-            emptyList(),
-            emptyList()
+            lastName = "Di Tolstoy"
         )
         val lena = User(
             id = 2,
             firstName = "Lena",
-            lastName = "Berkova",
-            emptyList(),
-            emptyList()
+            lastName = "Berkova"
         )
         val message1 = Message(
             dateTime = formatted,
@@ -309,16 +270,12 @@ class ChatServiceTest {
         val vasya = User(
             id = 1,
             firstName = "Leo",
-            lastName = "Di Tolstoy",
-            emptyList(),
-            emptyList()
+            lastName = "Di Tolstoy"
         )
         val lena = User(
             id = 2,
             firstName = "Lena",
-            lastName = "Berkova",
-            emptyList(),
-            emptyList()
+            lastName = "Berkova"
         )
         val message1 = Message(
             dateTime = formatted,
@@ -354,16 +311,12 @@ class ChatServiceTest {
         val vasya = User(
             id = 1,
             firstName = "Leo",
-            lastName = "Di Tolstoy",
-            emptyList(),
-            emptyList()
+            lastName = "Di Tolstoy"
         )
         val lena = User(
             id = 2,
             firstName = "Lena",
-            lastName = "Berkova",
-            emptyList(),
-            emptyList()
+            lastName = "Berkova"
         )
         val message1 = Message(
             dateTime = formatted,
@@ -399,16 +352,12 @@ class ChatServiceTest {
         val vasya = User(
             id = 1,
             firstName = "Leo",
-            lastName = "Di Tolstoy",
-            emptyList(),
-            emptyList()
+            lastName = "Di Tolstoy"
         )
         val lena = User(
             id = 2,
             firstName = "Lena",
-            lastName = "Berkova",
-            emptyList(),
-            emptyList()
+            lastName = "Berkova"
         )
         val message1 = Message(
             id = 1,
@@ -425,7 +374,7 @@ class ChatServiceTest {
         val result = chatService.getChatList()
 
         // assert
-        assertEquals(result, mutableMapOf(Pair((1), mutableListOf(message1))))
+        assertTrue(result.size == 1)
     }
 
     @Test
@@ -438,16 +387,12 @@ class ChatServiceTest {
         val vasya = User(
             id = 1,
             firstName = "Leo",
-            lastName = "Di Tolstoy",
-            emptyList(),
-            emptyList()
+            lastName = "Di Tolstoy"
         )
         val lena = User(
             id = 2,
             firstName = "Lena",
-            lastName = "Berkova",
-            emptyList(),
-            emptyList()
+            lastName = "Berkova"
         )
         val message1 = Message(
             id = 1,
@@ -456,15 +401,68 @@ class ChatServiceTest {
             senderId = 1,
             recipientId = 2
         )
+        val message2 = Message(
+            id = 2,
+            dateTime = formatted,
+            text = "second",
+            senderId = 1,
+            recipientId = 2
+        )
 
         //act
         chatService.addUserToData(vasya)
         chatService.addUserToData(lena)
         chatService.addMessage(message1)
-        val result = chatService.getMessagesFromChat(listOf(1, 2), 1, 1)
+        chatService.addMessage(message2)
+        message2.markAsRead()
+        val result = chatService.getMessagesFromChat(chatId = listOf(1, 2), 1, 1)
 
         // assert
-        assertEquals(result, listOf(message1))
+        assertTrue(result.size == 1 && result[0].id == message2.id)
+    }
+
+    @Test
+    fun getMessagesFromChat_IdError() {
+        // arrange
+        val time: LocalDateTime = LocalDateTime.now()
+        val formatter: DateTimeFormatter = DateTimeFormatter.ofPattern("dd-MM-yyyy HH:mm:ss")
+        val formatted: String = time.format(formatter)
+        val chatService = ChatService()
+        val vasya = User(
+            id = 1,
+            firstName = "Leo",
+            lastName = "Di Tolstoy"
+        )
+        val lena = User(
+            id = 2,
+            firstName = "Lena",
+            lastName = "Berkova"
+        )
+        val message1 = Message(
+            id = 1,
+            dateTime = formatted,
+            text = "first",
+            senderId = 1,
+            recipientId = 2
+        )
+        val message2 = Message(
+            id = 2,
+            dateTime = formatted,
+            text = "second",
+            senderId = 1,
+            recipientId = 2
+        )
+
+        //act
+        chatService.addUserToData(vasya)
+        chatService.addUserToData(lena)
+        chatService.addMessage(message1)
+        chatService.addMessage(message2)
+        message2.markAsRead()
+        val result = chatService.getMessagesFromChat(chatId = listOf(3, 1), 1, 1)
+
+        // assert
+        assertTrue(result.isEmpty())
     }
 
     @Test
@@ -477,16 +475,12 @@ class ChatServiceTest {
         val lena = User(
             id = 2,
             firstName = "Lena",
-            lastName = "Berkova",
-            emptyList(),
-            emptyList()
+            lastName = "Berkova"
         )
         val jora = User(
             id = 3,
             firstName = "Giorgio",
-            lastName = "Vkarmani",
-            emptyList(),
-            emptyList()
+            lastName = "Vkarmani"
         )
         val message8 = Message(
             dateTime = formatted,
@@ -502,6 +496,6 @@ class ChatServiceTest {
         val result = chatService.getUnreadChats(3)
 
         // assert
-        assertTrue(result.size == 1)
+        assertTrue(result == 1)
     }
 }
