@@ -11,31 +11,23 @@ fun main() {
 
     val vasya = User(
         id = 1,
-        firstName = "Leo",
-        lastName = "Di Tolstoy",
-        emptyList(),
-        emptyList()
+        firstName = "Vasya",
+        lastName = "Pupkin",
     )
     val lena = User(
         id = 2,
         firstName = "Lena",
         lastName = "Berkova",
-        emptyList(),
-        emptyList()
     )
     val jora = User(
         id = 3,
         firstName = "Giorgio",
         lastName = "Vkarmani",
-        emptyList(),
-        emptyList()
     )
     val leo = User(
         id = 4,
         firstName = "Leo",
         lastName = "Di Tolstoy",
-        emptyList(),
-        emptyList()
     )
 
     val message1 = Message(
@@ -47,8 +39,8 @@ fun main() {
     val message2 = Message(
         dateTime = formatted,
         text = "second",
-        senderId = 1,
-        recipientId = 4
+        senderId = 2,
+        recipientId = 1
     )
     val message3 = Message(
         dateTime = formatted,
@@ -130,8 +122,15 @@ fun main() {
     chatService.addMessage(message11)
 
     chatService.editingMessage(updatedMessage)
-    chatService.getUnreadChats(1)
-    chatService.deleteMessage(8)
-    chatService.deleteChatById(listOf(3, 1))
+    val unreadChat = chatService.getUnreadChats(3)
+    println("Количество непрочитанных чатов = $unreadChat")
+    chatService.deleteMessage(5)
+    chatService.deleteChatById(listOf(4, 2))
     chatService.getMessagesFromChat(chatId = listOf(1, 2), 5, 2)
+
+    val print = chatService.getChatList()
+
+    for ((k, v) in print) {
+        println("$k\t$v")
+    }
 }
