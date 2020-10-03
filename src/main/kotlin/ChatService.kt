@@ -69,8 +69,8 @@ class ChatService {
         return false
     }
 
-    fun getChatList(): Map<List<Int>, MutableList<Message>> {
-        return chats
+    fun getChatList(): Map<List<Int>, List<Message>> {
+        return chats.toMap()
     }
 
     fun getMessagesFromChat(chatId: List<Int>, lastMessageId: Int, numberOfMessages: Int): List<Message> {
