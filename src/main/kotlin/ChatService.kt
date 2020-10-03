@@ -22,7 +22,7 @@ class ChatService {
 
         chats.forEach { (k, v) ->
             if (k.contains(message.senderId) && k.contains(message.recipientId)) {
-                chats[k] = v.plusElement(newMessage) as MutableList<Message>
+                chats[k] = v.plusElement(newMessage).toMutableList()
                 return chats[k]?.size
             }
         }
